@@ -24,7 +24,6 @@ public class PigLatin {
     public String translate(String word){
         pigWord = ""; // this clears the pigWord and booleans for the next translation 
         //resetting booleans here causes errors
-
         firstUppercaseLetter = firstLetterUppercase(word);
 
         word = word.toLowerCase(); //lowercase the word after checking for uppercase
@@ -32,11 +31,13 @@ public class PigLatin {
         firstLast = checkFirstLast(word); //this sets a boolean to true if firstlast are the same, false if firstlast are different
 
         pigWord = checkQ(word); //checks and modifies if it starts with q or qu
-        pigWord = checkY(word); //checks and modifies if it starts with y
+        
+        if (!qStart){
+            pigWord = checkY(word); //checks and modifies if it starts with y
+        }
+        
+        System.out.println(qStart);
 
-        //System.out.println(yStart);
-        //System.out.println(firstLast);
-        System.out.println(firstUppercaseLetter);
 
         if (qStart == false && yStart == false){ //if it doesnt start with q, qu, or y
             pigWord = checkConsonantsPlace(word); //do the consonant translation
@@ -60,7 +61,6 @@ public class PigLatin {
 
     }
 
- 
     private boolean firstLetterUppercase(String word) { //boolean flag for if the first character is uppercase
         if(word.substring(0,1).equals(word.substring(0,1).toUpperCase())){
             return true;
@@ -104,12 +104,13 @@ public class PigLatin {
         if (wordLength > 2) {
 
             if (word.substring(0, 2).equals("qu")) { //if the word starts with QU 
-                word = word.substring(2) + "qu" + "ay";
                 qStart = true;
+                return word = word.substring(2) + "qu" + "ay";
+                
             }
-            else if (word.substring(1).equals("q")) { //if the word starts with just a q
-                word = word.substring(1) + "q" + "ay";   
+            else if (word.substring(0, 1).equals("q")) { //if the word starts with just a q
                 qStart = true;
+                return word = word.substring(1) + "q" + "ay";   
             }
 
         }
@@ -178,3 +179,4 @@ public class PigLatin {
 
 
         
+//punctuation added to the end unless it is a double quote which is added to the front
