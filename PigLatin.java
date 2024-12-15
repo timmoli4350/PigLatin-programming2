@@ -19,6 +19,7 @@ public class PigLatin {
     boolean longVowelCheck = false;
     boolean checkingPigWord = false;
     boolean vowelMethodRun = false;
+    boolean consonantRun = false;
 
     // constructor
     PigLatin(){
@@ -38,19 +39,13 @@ public class PigLatin {
         if (!qStart){
             pigWord = checkY(word); //checks and modifies if it starts with y
         }
-        
 
-
-
-        if (qStart == false && yStart == false){ //if it doesnt start with q, qu, or y
-            pigWord = checkConsonantsPlace(word); //do the consonant translation
+        if (!qStart && !yStart){
+            pigWord = checkVowels(word);
         }
-
-        pigWord = checkVowels(word);
- 
-        if (consonantStart == false && qStart == false && yStart == false) { //if it didn't start with a q, y, or consonant ||THIS NEVER GETS ACTIVATED  UNLESS  is taken out
-            checkingPigWord = true; //this does not run
-            pigWord = checkVowels(word); //check for all vowel cases
+            
+        if (qStart == false && yStart == false && vowelCheck == false && longVowelCheck == false){ //if it doesnt start with q, qu, or y, or vowels
+            pigWord = checkConsonantsPlace(word); //do the consonant translation
         }
 
         if (qStart == true || yStart == true || consonantStart == true){ //if it started with q, y, or consonant
@@ -59,13 +54,12 @@ public class PigLatin {
             }
         }
 
-
-
         if (firstUppercaseLetter == true) { //if the first letter (the boolean we set at the start) was true
             pigWord = uppercaseFirst(pigWord); //uppercase the first letter of the returned word
         }
         
         //-------------------------------------------------------- debug
+        
         System.out.println("does it start with a consonant?");
         System.out.println(consonantStart);
         System.out.println("were the subsets of the vowel method run?");
@@ -81,7 +75,9 @@ public class PigLatin {
         System.out.println(firstLast);
         System.out.println("was the vowel method run at all?");
         System.out.println(vowelMethodRun);
-
+        System.out.println("was the consonants method run at all?");
+        System.out.println(consonantRun);
+        
         //------------------------------------------------------------------
 
 
@@ -166,6 +162,7 @@ public class PigLatin {
         String vowels = "aeiouy";
         int vowelsLength = vowels.length();
         int vowelPlace = 0;
+        consonantRun = true;
 
         for (int i = 0; i < wordLength; i++) {                       //cycles through each letter of word
             for(int t = 0; t < vowelsLength; t++) {                  //compares each letter of word to each letter of vowels
@@ -191,16 +188,21 @@ public class PigLatin {
         String vowels = "aeiouy";
         int vowelsLength = vowels.length();
 
-        if(wordLength <= 3) {
-            vowelCheck = true;
-            return word = word + "hay";
-        }
+        //CHECK IF THERE IS A VOWEL FIRST
+            for(int t = 0; t < vowelsLength; t++) {                  //compares each letter of word to each letter of vowels
+                if(word.charAt(0) == vowels.charAt(t)){ 
+                    if(wordLength <= 3) {
+                        vowelCheck = true;
+                        return word = word + "hay";
+                    }
 
-        if(wordLength >= 4) {
-            longVowelCheck = true;
-            return word = word + "way";
-    
-        }
+                    if(wordLength >= 4) {
+                        longVowelCheck = true;
+                        return word = word + "way";
+                
+                    }
+                }
+            }
     return word;
     }
 }   
