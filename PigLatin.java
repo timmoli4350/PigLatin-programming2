@@ -26,10 +26,9 @@ public class PigLatin {
     }
 
     public String translate(String word){
-        pigWord = ""; // this clears the pigWord and booleans for the next translation 
-        //resetting booleans here causes errors
-        firstUppercaseLetter = firstLetterUppercase(word);
+        pigWord = ""; // this clears the pigWord for the next translation 
 
+        firstUppercaseLetter = firstLetterUppercase(word);
         word = word.toLowerCase(); //lowercase the word after checking for uppercase
 
         firstLast = checkFirstLast(word); //this sets a boolean to true if firstlast are the same, false if firstlast are different
@@ -40,24 +39,7 @@ public class PigLatin {
             pigWord = checkY(word); //checks and modifies if it starts with y
         }
         
-        //-------------------------------------------------------- debug
-        System.out.println("does it start with a consonant?");
-        System.out.println(consonantStart);
-        System.out.println("were the subsets of the vowel method run?");
-        System.out.println(vowelCheck);
-        System.out.println("does it start with a vowel and is over 4 letters?");
-        System.out.println(longVowelCheck);
-        System.out.println("q and y");
-        System.out.println(qStart);
-        System.out.println(yStart);
-        System.out.println("checkingPigWordVowels");
-        System.out.println(checkingPigWord);
-        System.out.println("are the first and last letters the same?");
-        System.out.println(firstLast);
-        System.out.println("was the vowel method run at all?");
-        System.out.println(vowelMethodRun);
 
-        //------------------------------------------------------------------
 
 
         if (qStart == false && yStart == false){ //if it doesnt start with q, qu, or y
@@ -83,6 +65,26 @@ public class PigLatin {
             pigWord = uppercaseFirst(pigWord); //uppercase the first letter of the returned word
         }
         
+        //-------------------------------------------------------- debug
+        System.out.println("does it start with a consonant?");
+        System.out.println(consonantStart);
+        System.out.println("were the subsets of the vowel method run?");
+        System.out.println(vowelCheck);
+        System.out.println("does it start with a vowel and is over 4 letters?");
+        System.out.println(longVowelCheck);
+        System.out.println("q and y");
+        System.out.println(qStart);
+        System.out.println(yStart);
+        System.out.println("checkingPigWordVowels");
+        System.out.println(checkingPigWord);
+        System.out.println("are the first and last letters the same?");
+        System.out.println(firstLast);
+        System.out.println("was the vowel method run at all?");
+        System.out.println(vowelMethodRun);
+
+        //------------------------------------------------------------------
+
+
         return pigWord;
 
     }
