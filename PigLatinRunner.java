@@ -34,6 +34,6 @@ public class PigLatinRunner
 			System.out.println("   PigWord = "+ pigWord); //debug: print each word individually
 			pigSentence += " " + pigWord;
 		}
-		//System.out.println("   PigSentence =" + pigSentence); //for the final code; print the full sentence
+		System.out.println("   PigSentence =" + pigSentence); //for the final code; print the full sentence
 	}
 }

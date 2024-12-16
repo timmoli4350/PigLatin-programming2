@@ -153,7 +153,7 @@ public class PigLatin { //I think running one time is affecting the next time it
                 return word = word.substring(2) + "qu" + "ay";
                 
             }
-            else if (word.substring(0, 1).equals("q")) { //if the word starts with just a q
+            if (word.substring(0, 1).equals("q")) { //if the word starts with just a q
                 qStart = true;
                 return word = word.substring(1) + "q" + "ay";   
             }
