@@ -6,16 +6,17 @@
  * 
  */
 
-public class PigLatin {
+public class PigLatin { //I think running one time is affecting the next time it is run. 
 
     String pigWord = "";
 
-    boolean firstLast = false;
+    boolean firstLast = false; //boolean flags
     boolean qStart = false;
     boolean yStart = false;
     boolean consonantStart = false;
     boolean firstUppercaseLetter = false;
-    boolean vowelCheck = false;
+
+    boolean vowelCheck = false; //debug booleans
     boolean longVowelCheck = false;
     boolean checkingPigWord = false;
     boolean vowelMethodRun = false;
@@ -28,6 +29,8 @@ public class PigLatin {
 
     public String translate(String word){
         pigWord = ""; // this clears the pigWord for the next translation 
+        resetBooleans();
+
 
         firstUppercaseLetter = firstLetterUppercase(word);
         word = word.toLowerCase(); //lowercase the word after checking for uppercase
@@ -59,7 +62,7 @@ public class PigLatin {
         }
         
         //-------------------------------------------------------- debug
-        
+        /* 
         System.out.println("does it start with a consonant?");
         System.out.println(consonantStart);
         System.out.println("were the subsets of the vowel method run?");
@@ -77,13 +80,31 @@ public class PigLatin {
         System.out.println(vowelMethodRun);
         System.out.println("was the consonants method run at all?");
         System.out.println(consonantRun);
-        
+        */
         //------------------------------------------------------------------
 
 
         return pigWord;
 
     }
+
+    private void resetBooleans() {
+        boolean firstLast = false;
+        boolean qStart = false;
+        boolean yStart = false;
+        boolean consonantStart = false;
+        boolean firstUppercaseLetter = false;
+        boolean vowelCheck = false;
+        boolean longVowelCheck = false;
+        boolean checkingPigWord = false;
+        boolean vowelMethodRun = false;
+        boolean consonantRun = false;
+    }
+
+
+
+
+
 
     private boolean firstLetterUppercase(String word) { //boolean flag for if the first character is uppercase
         if(word.substring(0,1).equals(word.substring(0,1).toUpperCase())){
