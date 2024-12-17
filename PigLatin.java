@@ -6,7 +6,7 @@
  * 
  */
 
-public class PigLatin { //I think running one time is affecting the next time it is run. 
+public class PigLatin { 
 
     String pigWord = "";
 
@@ -33,16 +33,16 @@ public class PigLatin { //I think running one time is affecting the next time it
 
     public String translate(String word){
         pigWord = ""; // this clears the pigWord for the next translation 
-        punctuationHolder = "";
-        quoteHolder = "";
-        resetBooleans();
+        punctuationHolder = ""; //this clears the punctuation holder for the next translation
+        quoteHolder = ""; // this clears the quote holder for the next translation
+        resetBooleans(); //this resets all booleans for the next translation
 
 
 
-        firstUppercaseLetter = firstLetterUppercase(word);
+        firstUppercaseLetter = firstLetterUppercase(word); // check if the first letter needs to be uppercase at the end
         word = word.toLowerCase(); //lowercase the word after checking for uppercase
         
-        word = doubleQuotes(word);
+        word = doubleQuotes(word); //modify for quotes, string quoteHolder takes all punctuation
         word = takePunctuation(word); //sets the string punctuationholder to take all the punctuation 
 
         firstLast = checkFirstLast(word); //this sets a boolean to true if firstlast are the same, false if firstlast are different
@@ -54,7 +54,7 @@ public class PigLatin { //I think running one time is affecting the next time it
         }
 
         if (!qStart && !yStart){
-            pigWord = checkVowels(word);
+            pigWord = checkVowels(word); //checks and modifies if it starts with a vowel
         }
             
         if (qStart == false && yStart == false && vowelCheck == false && longVowelCheck == false){ //if it doesnt start with q, qu, or y, or vowels
@@ -72,11 +72,11 @@ public class PigLatin { //I think running one time is affecting the next time it
         
         }
 
-        return quoteHolder + pigWord + punctuationHolder;
+        return quoteHolder + pigWord + punctuationHolder; //final return with punctuation
 
     }
 
-    private void resetBooleans() {
+    private void resetBooleans() { //resets all the booleans for the next word, run at the start of each new input
         firstLast = false;
         qStart = false;
         yStart = false;
@@ -96,11 +96,11 @@ public class PigLatin { //I think running one time is affecting the next time it
 
 
         for (int i = 0; i < wordLength; i++) {                       //cycles through each letter of word
-            if(word.charAt(i) == 34){      
+            if(word.charAt(i) == 34){      //34 is the ASCII value for double quotes
                 quoteHolder = quoteHolder + word.substring(i, i+1); 
                 word = word.substring(0, i) + word.substring(i+1, wordLength);
-                wordLength = wordLength - 1;
-                i--;
+                wordLength = wordLength - 1; //since the word length decreases with each removed letter
+                i--; //remove 1 from the index, see above
             }
         }
         return word;
@@ -119,8 +119,8 @@ public class PigLatin { //I think running one time is affecting the next time it
                 if(word.charAt(i) == punctuation.charAt(t)){       //if the letter currently there equals one of the punctuations,
                     punctuationHolder = punctuationHolder + word.substring(i, i+1); //add this piece of punctuation to the punctuationHolder
                     word = word.substring(0, i) + word.substring(i+1, wordLength);
-                    wordLength = wordLength - 1;
-                    i--;
+                    wordLength = wordLength - 1; //since the word length decreases with each removed letter
+                    i--; //remove 1 from the index, see above
                 }
             }
         }
@@ -238,12 +238,12 @@ public class PigLatin { //I think running one time is affecting the next time it
                 if(word.charAt(0) == vowels.charAt(t)){ 
                     if(wordLength <= 3) {
                         vowelCheck = true;
-                        return word = word + "hay";
+                        return word = word + "hay"; // for under =  3 letters
                     }
 
                     if(wordLength >= 4) {
                         longVowelCheck = true;
-                        return word = word + "way";
+                        return word = word + "way"; // for over = 4 letters
                 
                     }
                 }
