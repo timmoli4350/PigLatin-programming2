@@ -22,6 +22,8 @@ public class PigLatin { //I think running one time is affecting the next time it
     boolean vowelMethodRun = false;
     boolean consonantRun = false;
 
+    String punctuationHolder = "";
+
     // constructor
     PigLatin(){
     
@@ -34,6 +36,8 @@ public class PigLatin { //I think running one time is affecting the next time it
 
         firstUppercaseLetter = firstLetterUppercase(word);
         word = word.toLowerCase(); //lowercase the word after checking for uppercase
+
+        punctuationHolder = takePunctuation(word); //sets the string punctuationholder to take all the punctuation 
 
         firstLast = checkFirstLast(word); //this sets a boolean to true if firstlast are the same, false if firstlast are different
 
@@ -89,22 +93,38 @@ public class PigLatin { //I think running one time is affecting the next time it
     }
 
     private void resetBooleans() {
-        boolean firstLast = false;
-        boolean qStart = false;
-        boolean yStart = false;
-        boolean consonantStart = false;
-        boolean firstUppercaseLetter = false;
-        boolean vowelCheck = false;
-        boolean longVowelCheck = false;
-        boolean checkingPigWord = false;
-        boolean vowelMethodRun = false;
-        boolean consonantRun = false;
+        firstLast = false;
+        qStart = false;
+        yStart = false;
+        consonantStart = false;
+        firstUppercaseLetter = false;
+        vowelCheck = false;
+        longVowelCheck = false;
+        checkingPigWord = false;
+        vowelMethodRun = false;
+        consonantRun = false;
     }
 
 
 
 
+    private String takePunctuation(String word){
 
+        int wordLength = word.length();
+        String punctuation = ".!;:/,?";
+        int punctuationLength = punctuation.length();
+
+        for (int i = 0; i < wordLength; i++) {                       //cycles through each letter of word
+            for(int t = 0; t < punctuationLength; t++) {                  //compares each letter of word to each letter of punctuation
+                if(word.charAt(i) == punctuation.charAt(t)){
+                    punctuationHolder = punctuationHolder + word.substring(i, i+1); //add this piece of punctuation to the punctuationHolder
+                    
+        
+                }
+            }
+        }
+        return word;
+    }
 
     private boolean firstLetterUppercase(String word) { //boolean flag for if the first character is uppercase
         if(word.substring(0,1).equals(word.substring(0,1).toUpperCase())){
