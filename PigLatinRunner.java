@@ -31,7 +31,7 @@ public class PigLatinRunner
 			word = chopper.next(); //get the next word
 			//out.println(word); // debug - print the original word on the console
 			pigWord = pigLatin.translate(word);
-			System.out.println("   PigWord = "+ pigWord); //debug: print each word individually
+			//System.out.println("   PigWord = "+ pigWord); //debug: print each word individually
 			pigSentence += " " + pigWord;
 		}
 		System.out.println("   PigSentence =" + pigSentence); //for the final code; print the full sentence

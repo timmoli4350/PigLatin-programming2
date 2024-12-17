@@ -21,8 +21,10 @@ public class PigLatin { //I think running one time is affecting the next time it
     boolean checkingPigWord = false;
     boolean vowelMethodRun = false;
     boolean consonantRun = false;
+    
 
     String punctuationHolder = "";
+    String quoteHolder = "";
 
     // constructor
     PigLatin(){
@@ -31,13 +33,17 @@ public class PigLatin { //I think running one time is affecting the next time it
 
     public String translate(String word){
         pigWord = ""; // this clears the pigWord for the next translation 
+        punctuationHolder = "";
+        quoteHolder = "";
         resetBooleans();
+
 
 
         firstUppercaseLetter = firstLetterUppercase(word);
         word = word.toLowerCase(); //lowercase the word after checking for uppercase
-
-        punctuationHolder = takePunctuation(word); //sets the string punctuationholder to take all the punctuation 
+        
+        word = doubleQuotes(word);
+        word = takePunctuation(word); //sets the string punctuationholder to take all the punctuation 
 
         firstLast = checkFirstLast(word); //this sets a boolean to true if firstlast are the same, false if firstlast are different
 
@@ -63,32 +69,10 @@ public class PigLatin { //I think running one time is affecting the next time it
 
         if (firstUppercaseLetter == true) { //if the first letter (the boolean we set at the start) was true
             pigWord = uppercaseFirst(pigWord); //uppercase the first letter of the returned word
-        }
         
-        //-------------------------------------------------------- debug
-        /* 
-        System.out.println("does it start with a consonant?");
-        System.out.println(consonantStart);
-        System.out.println("were the subsets of the vowel method run?");
-        System.out.println(vowelCheck);
-        System.out.println("does it start with a vowel and is over 4 letters?");
-        System.out.println(longVowelCheck);
-        System.out.println("q and y");
-        System.out.println(qStart);
-        System.out.println(yStart);
-        System.out.println("checkingPigWordVowels");
-        System.out.println(checkingPigWord);
-        System.out.println("are the first and last letters the same?");
-        System.out.println(firstLast);
-        System.out.println("was the vowel method run at all?");
-        System.out.println(vowelMethodRun);
-        System.out.println("was the consonants method run at all?");
-        System.out.println(consonantRun);
-        */
-        //------------------------------------------------------------------
+        }
 
-
-        return pigWord;
+        return quoteHolder + pigWord + punctuationHolder;
 
     }
 
@@ -106,7 +90,23 @@ public class PigLatin { //I think running one time is affecting the next time it
     }
 
 
+    private String doubleQuotes(String word){
 
+        int wordLength = word.length();
+
+
+        for (int i = 0; i < wordLength; i++) {                       //cycles through each letter of word
+            if(word.charAt(i) == 34){      
+                quoteHolder = quoteHolder + word.substring(i, i+1); 
+                word = word.substring(0, i) + word.substring(i+1, wordLength);
+                wordLength = wordLength - 1;
+                i--;
+            }
+        }
+        return word;
+    }
+
+        
 
     private String takePunctuation(String word){
 
@@ -116,15 +116,19 @@ public class PigLatin { //I think running one time is affecting the next time it
 
         for (int i = 0; i < wordLength; i++) {                       //cycles through each letter of word
             for(int t = 0; t < punctuationLength; t++) {                  //compares each letter of word to each letter of punctuation
-                if(word.charAt(i) == punctuation.charAt(t)){
+                if(word.charAt(i) == punctuation.charAt(t)){       //if the letter currently there equals one of the punctuations,
                     punctuationHolder = punctuationHolder + word.substring(i, i+1); //add this piece of punctuation to the punctuationHolder
-                    
-        
+                    word = word.substring(0, i) + word.substring(i+1, wordLength);
+                    wordLength = wordLength - 1;
+                    i--;
                 }
             }
         }
+
         return word;
     }
+
+
 
     private boolean firstLetterUppercase(String word) { //boolean flag for if the first character is uppercase
         if(word.substring(0,1).equals(word.substring(0,1).toUpperCase())){
@@ -248,7 +252,3 @@ public class PigLatin { //I think running one time is affecting the next time it
     }
 }   
  
-
-
-        
-//punctuation added to the end unless it is a double quote which is added to the front
