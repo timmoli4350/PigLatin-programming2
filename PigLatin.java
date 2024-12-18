@@ -15,6 +15,7 @@ public class PigLatin {
     boolean yStart = false;
     boolean consonantStart = false;
     boolean firstUppercaseLetter = false;
+    boolean hasQuotes = false;
 
     boolean vowelCheck = false; //debug booleans
     boolean longVowelCheck = false;
@@ -80,17 +81,17 @@ public class PigLatin {
         }
 
 
-        if (quoteCounter == 0){ //meaning there was no quote put in yet (IT NEVER DOES THIS)
-            quoteCounter++;
+        if (quoteCounter == 0 && hasQuotes == true){ //meaning there was no quote put in yet (IT NEVER DOES THIS) ALWAYS RUN
+            quoteCounter++; //SINCE IT ALWAYS RUNS THIS
             return quoteHolder + pigWord + punctuationHolder;
         }
 
-        if (quoteCounter == 1){ //meaning it already put in a quote
-            quoteCounter = 0;
+        if (quoteCounter == 1 && hasQuotes == true){ //meaning it already put in a quote
+            quoteCounter = 0; //SINCE IT ALWAYS RUNS THIS
             return pigWord + punctuationHolder + quoteHolder;  //final return with punctuation
         }
         
-        return pigWord;
+        return pigWord + punctuationHolder;
     }
 
     private void resetBooleans() { //resets all the booleans for the next word, run at the start of each new input
@@ -104,6 +105,7 @@ public class PigLatin {
         checkingPigWord = false;
         vowelMethodRun = false;
         consonantRun = false;
+        hasQuotes = false;
     }
 
 
@@ -114,6 +116,7 @@ public class PigLatin {
 
         for (int i = 0; i < wordLength; i++) {                       //cycles through each letter of word
             if(word.charAt(i) == 34){      //34 is the ASCII value for double quotes
+                hasQuotes = true;
                 quoteHolder = quoteHolder + word.substring(i, i+1); 
                 word = word.substring(0, i) + word.substring(i+1, wordLength);
                 wordLength = wordLength - 1; //since the word length decreases with each removed letter
@@ -121,7 +124,6 @@ public class PigLatin {
             }
         }
 
-        //quoteCounter++;
         return word;
     }
 

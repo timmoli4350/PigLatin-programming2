@@ -19,7 +19,7 @@ public class PigLatinRunner
 		PigLatin pigLatin = new PigLatin(); // instantiates the pigLatin object
 
 		//Scanner keyboard = new Scanner(System.in); // setup to read from the keyboard ||KEYBOARD
-		
+ 		
 		Scanner file = new Scanner(new File("PigLatinTestData.txt")); //TO READ FILE
 			while(file.hasNext()) {
 				sentence = file.nextLine();
@@ -35,7 +35,7 @@ public class PigLatinRunner
 		
 
  
-
+ 
 		Scanner chopper = new Scanner(sentence); // setup the chopper to get one word at a time from the sentence ||KEYBOARD
 		while(chopper.hasNext()) // loop to read one word at a time from sentence
 		{
@@ -47,8 +47,10 @@ public class PigLatinRunner
 		}
 		System.out.println("   PigSentence =" + pigSentence); //for the final code; print the full sentence
 		
-	}
 
-	//file.close();
+		}
+		file.close();
+	}
+	
 }
-}
+
