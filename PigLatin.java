@@ -16,14 +16,11 @@ public class PigLatin {
     boolean consonantStart = false;
     boolean firstUppercaseLetter = false;
     boolean hasQuotes = false;
-
-    boolean vowelCheck = false; //debug booleans
+    boolean vowelCheck = false; 
     boolean longVowelCheck = false;
-    boolean checkingPigWord = false;
-    boolean vowelMethodRun = false;
-    boolean consonantRun = false;
     
-    int quoteCounter = 0;
+    int quoteCounter = 0; //will either be one or 0 based on quotes already placed in the sentence
+                          //this could be a boolean instead
 
     String punctuationHolder = "";
     String quoteHolder = "";
@@ -40,7 +37,6 @@ public class PigLatin {
         quoteHolder = ""; // this clears the quote holder for the next translation
         deleteLetter = "";
         resetBooleans(); //this resets all booleans for the next translation
-
 
 
         firstUppercaseLetter = firstLetterUppercase(word); // check if the first letter needs to be uppercase at the end
@@ -73,25 +69,23 @@ public class PigLatin {
 
         if (firstUppercaseLetter == true) { //if the first letter (the boolean we set at the start) was true
             pigWord = uppercaseFirst(pigWord); //uppercase the first letter of the returned word
-        
         }
 
-        if (quoteHolder.length() == 2){
+        if (quoteHolder.length() == 2){ 
             return quoteHolder.substring(0,1) + pigWord + punctuationHolder + quoteHolder.substring(1,2);
         }
 
-
-        if (quoteCounter == 0 && hasQuotes == true){ //meaning there was no quote put in yet (IT NEVER DOES THIS) ALWAYS RUN
-            quoteCounter++; //SINCE IT ALWAYS RUNS THIS
-            return quoteHolder + pigWord + punctuationHolder;
+        if (quoteCounter == 0 && hasQuotes == true){ //meaning there was no quote put in yet for that phrase
+            quoteCounter++; 
+            return quoteHolder + pigWord + punctuationHolder; //final return with punctuation: puts the first quote at the start
         }
 
-        if (quoteCounter == 1 && hasQuotes == true){ //meaning it already put in a quote
-            quoteCounter = 0; //SINCE IT ALWAYS RUNS THIS
-            return pigWord + punctuationHolder + quoteHolder;  //final return with punctuation
+        if (quoteCounter == 1 && hasQuotes == true){ //meaning it already put in a quote for that phrase
+            quoteCounter = 0; 
+            return pigWord + punctuationHolder + quoteHolder;  //final return with punctuation: puts the second quote at the end
         }
         
-        return pigWord + punctuationHolder;
+        return pigWord + punctuationHolder; //return just the word and punctuation 
     }
 
     private void resetBooleans() { //resets all the booleans for the next word, run at the start of each new input
@@ -102,32 +96,25 @@ public class PigLatin {
         firstUppercaseLetter = false;
         vowelCheck = false;
         longVowelCheck = false;
-        checkingPigWord = false;
-        vowelMethodRun = false;
-        consonantRun = false;
         hasQuotes = false;
     }
-
 
     private String doubleQuotes(String word){
 
         int wordLength = word.length();
 
-
         for (int i = 0; i < wordLength; i++) {                       //cycles through each letter of word
-            if(word.charAt(i) == 34){      //34 is the ASCII value for double quotes
+            if(word.charAt(i) == 34){                                //34 is the ASCII value for double quotes
                 hasQuotes = true;
                 quoteHolder = quoteHolder + word.substring(i, i+1); 
                 word = word.substring(0, i) + word.substring(i+1, wordLength);
-                wordLength = wordLength - 1; //since the word length decreases with each removed letter
-                i--; //remove 1 from the index, see above
+                wordLength = wordLength - 1;                         //since the word length decreases with each removed letter
+                i--;                                                 //remove 1 from the index, see above
             }
         }
-
         return word;
     }
 
-        
 
     private String takePunctuation(String word){
 
@@ -145,10 +132,8 @@ public class PigLatin {
                 }
             }
         }
-
         return word;
     }
-
 
 
     private boolean firstLetterUppercase(String word) { //boolean flag for if the first character is uppercase
@@ -188,7 +173,6 @@ public class PigLatin {
                 return word;
             }
         }
-        
         return word;
     }
 
@@ -207,9 +191,7 @@ public class PigLatin {
                 qStart = true;
                 return word = word.substring(1) + "q" + "ay";   
             }
-
         }
-
         return word;
     }
 
@@ -224,7 +206,6 @@ public class PigLatin {
                 yStart = true; //flag if this part of the method was run
             }
         }
-
         return word;
     }
 
@@ -233,7 +214,6 @@ public class PigLatin {
         String vowels = "aeiouy";
         int vowelsLength = vowels.length();
         int vowelPlace = 0;
-        consonantRun = true;
 
         for (int i = 0; i < wordLength; i++) {                       //cycles through each letter of word
             for(int t = 0; t < vowelsLength; t++) {                  //compares each letter of word to each letter of vowels
@@ -245,14 +225,11 @@ public class PigLatin {
                 }
             }
         }
-
         return word;
     }
 
 
     private String checkVowels(String word) { //------------------------------ checkVowels
-
-        vowelMethodRun = true;
 
         int wordLength = word.length();
 

@@ -47,7 +47,6 @@ public class PigLatinRunner
 		}
 		System.out.println("   PigSentence =" + pigSentence); //for the final code; print the full sentence
 		
-
 		}
 		file.close();
 	}
