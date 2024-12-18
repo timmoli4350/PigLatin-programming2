@@ -25,6 +25,7 @@ public class PigLatin {
 
     String punctuationHolder = "";
     String quoteHolder = "";
+    String deleteLetter = "";
 
     // constructor
     PigLatin(){
@@ -35,6 +36,7 @@ public class PigLatin {
         pigWord = ""; // this clears the pigWord for the next translation 
         punctuationHolder = ""; //this clears the punctuation holder for the next translation
         quoteHolder = ""; // this clears the quote holder for the next translation
+        deleteLetter = "";
         resetBooleans(); //this resets all booleans for the next translation
 
 
@@ -151,6 +153,7 @@ public class PigLatin {
         int wordLength = word.length();
         if(word.substring(0,1).equals(word.substring(wordLength-1, wordLength))){
             firstLast = true;
+            deleteLetter = word.substring(0,1);
             return true;
         }
         return false;
@@ -159,8 +162,12 @@ public class PigLatin {
     private String fixFirstLast(String word) { //if at the end of the code, conditions above are met, this removes the 4th last letter - the double.
         
         int wordLength = word.length();
-        if(wordLength >= 4) {
-            word = word.substring(0, wordLength-3) + word.substring(wordLength-2, wordLength);
+
+        for (int i = wordLength-2; i > 0; i--){ //go from the end backwards excluding ay and delete the first instance of that letter
+            if (word.substring(i-2, i-1).equals(deleteLetter)){
+                word = word.substring(0, i-2) + word.substring(i-1, wordLength) ;
+                return word;
+            }
         }
         
         return word;
