@@ -22,6 +22,7 @@ public class PigLatin {
     boolean vowelMethodRun = false;
     boolean consonantRun = false;
     
+    int quoteCounter = 0;
 
     String punctuationHolder = "";
     String quoteHolder = "";
@@ -74,8 +75,22 @@ public class PigLatin {
         
         }
 
-        return quoteHolder + pigWord + punctuationHolder; //final return with punctuation
+        if (quoteHolder.length() == 2){
+            return quoteHolder.substring(0,1) + pigWord + punctuationHolder + quoteHolder.substring(1,2);
+        }
 
+
+        if (quoteCounter == 0){ //meaning there was no quote put in yet (IT NEVER DOES THIS)
+            quoteCounter++;
+            return quoteHolder + pigWord + punctuationHolder;
+        }
+
+        if (quoteCounter == 1){ //meaning it already put in a quote
+            quoteCounter = 0;
+            return pigWord + punctuationHolder + quoteHolder;  //final return with punctuation
+        }
+        
+        return pigWord;
     }
 
     private void resetBooleans() { //resets all the booleans for the next word, run at the start of each new input
@@ -105,6 +120,8 @@ public class PigLatin {
                 i--; //remove 1 from the index, see above
             }
         }
+
+        //quoteCounter++;
         return word;
     }
 

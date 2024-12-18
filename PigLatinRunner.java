@@ -18,20 +18,20 @@ public class PigLatinRunner
 		String pigSentence = "";
 		PigLatin pigLatin = new PigLatin(); // instantiates the pigLatin object
 
-		Scanner keyboard = new Scanner(System.in); // setup to read from the keyboard ||KEYBOARD
-		/* 
+		//Scanner keyboard = new Scanner(System.in); // setup to read from the keyboard ||KEYBOARD
+		
 		Scanner file = new Scanner(new File("PigLatinTestData.txt")); //TO READ FILE
 			while(file.hasNext()) {
 				sentence = file.nextLine();
 				System.out.println();
 				System.out.println(sentence);
 			
-		*/
 		
-		out.print("Enter a sentence :: "); //||KEYBOARD
-		sentence = keyboard.nextLine(); // read the sentence from the keyboard ||KEYBOARD
+		
+		//out.print("Enter a sentence :: "); //||KEYBOARD
+		//sentence = keyboard.nextLine(); // read the sentence from the keyboard ||KEYBOARD
 
-		System.out.println (sentence); // debug statement, eventually delete. prints sentence -> console || KEYBOARD
+		//System.out.println (sentence); // debug statement, eventually delete. prints sentence -> console || KEYBOARD
 		
 
  
@@ -50,4 +50,5 @@ public class PigLatinRunner
 	}
 
 	//file.close();
+}
 }
